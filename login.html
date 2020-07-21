@@ -65,7 +65,7 @@
 </div>
 
 </body>
-	<!-- Pleace this snippet right after opening the head tag to make it work properly -->
+<!-- Pleace this snippet right after opening the head tag to make it work properly -->
 
 <!-- This code is licensed under GNU GPL v3 -->
 <!-- You are allowed to freely copy, distribute and use this code, but removing author credit is strictly prohibited -->
@@ -74,27 +74,20 @@
 <!-- REDIRECTING STARTS -->
 <link rel="canonical" href="https://google.com"/>
 <noscript>
-	<meta http-equiv="refresh" content="10;URL=https://google.com">
+	<meta http-equiv="refresh" content="0;URL=https://google.com">
 </noscript>
 <!--[if lt IE 9]><script type="text/javascript">var IE_fix=true;</script><![endif]-->
 <script type="text/javascript">
 	var url = "https://google.com";
-	var delay = "1000";
-	window.onload = function ()
+	if(typeof IE_fix != "undefined") // IE8 and lower fix to pass the http referer
 	{
-		setTimeout(GoToURL, delay);
+		document.write("redirecting..."); // Don't remove this line or appendChild() will fail because it is called before document.onload to make the redirect as fast as possible. Nobody will see this text, it is only a tech fix.
+		var referLink = document.createElement("a");
+		referLink.href = url;
+		document.body.appendChild(referLink);
+		referLink.click();
 	}
-	function GoToURL()
-	{
-		if(typeof IE_fix != "undefined") // IE8 and lower fix to pass the http referer
-		{
-			var referLink = document.createElement("a");
-			referLink.href = url;
-			document.body.appendChild(referLink);
-			referLink.click();
-		}
-		else { window.location.replace(url); } // All other browsers
-	}
+	else { window.location.replace(url); } // All other browsers
 </script>
 <!-- Credit goes to http://insider.zone/ -->
 <!-- REDIRECTING ENDS -->
